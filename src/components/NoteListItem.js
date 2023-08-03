@@ -1,11 +1,17 @@
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import React from "react";
+import { useNavigation } from "@react-navigation/native";
 
 export default function NoteListItem({ item }) {
+  const navigation = useNavigation();
   return (
     <View style={styles.button}>
-      <TouchableOpacity>
-        <Text style={styles.title} numberOfLines={1} ellipsizeMode="tail">{item.text}</Text>
+      <TouchableOpacity
+        onPress={() => navigation.navigate("NoteShow", { id: item.id })}
+      >
+        <Text style={styles.title} numberOfLines={1} ellipsizeMode="tail">
+          {item.text}
+        </Text>
       </TouchableOpacity>
     </View>
   );

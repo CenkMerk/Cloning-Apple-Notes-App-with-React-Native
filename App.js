@@ -11,33 +11,31 @@ import { useNavigation } from "@react-navigation/native";
 import { Provider } from "./src/context/Notes";
 import NotesContext from "./src/context/Notes";
 import { useContext } from "react";
+import NoteShow from "./src/screens/NoteShow";
+import EditNoteScreen from "./src/screens/EditNoteScreen";
 
-const HeaderLeftComp = () => {
-  const { createNote } = useContext(NotesContext);
+const HeaderComp = ({ header, edit }) => {
   const navigation = useNavigation();
-  const HandleClick = () => {
-    navigation.goBack();
+  const { createNote, editNote } = useContext(NotesContext);
+  const HandleCreateNote = () => {
+    navigation.navigate("Home");
     createNote();
   };
-  return (
-    <TouchableOpacity onPress={HandleClick}>
-      <View style={styles.headerLeftContainer}>
-        <Ionicons name="chevron-back" size={30} color="#FFD52E" />
-        <Text style={styles.headerLeftTitle}>Notes</Text>
-      </View>
-    </TouchableOpacity>
-  );
-};
-const HeaderRightComp = () => {
-  const { createNote } = useContext(NotesContext);
-  const navigation = useNavigation();
-  const HandleClick = () => {
-    navigation.goBack();
-    createNote();
+  const HandleEditNote = () => {
+    console.log("edit");
+    navigation.navigate("Home");
+    editNote();
   };
   return (
-    <TouchableOpacity onPress={HandleClick}>
-      <Text style={styles.headerLeftTitle}>Done</Text>
+    <TouchableOpacity onPress={edit ? HandleEditNote : HandleCreateNote}>
+      {header === "left" ? (
+        <View style={styles.headerLeftContainer}>
+          <Ionicons name="chevron-back" size={30} color="#FFD52E" />
+          <Text style={styles.headerLeftTitle}>Notes</Text>
+        </View>
+      ) : (
+        <Text style={styles.headerLeftTitle}>Done</Text>
+      )}
     </TouchableOpacity>
   );
 };
@@ -62,8 +60,31 @@ export default function App() {
               headerStyle: {
                 backgroundColor: "#1C1C1E",
               },
-              headerLeft: () => <HeaderLeftComp />,
-              headerRight: () => <HeaderRightComp />,
+              headerLeft: () => <HeaderComp edit={false} header="left" />,
+              headerRight: () => <HeaderComp edit={false} header="right" />,
+            }}
+          />
+          <Stack.Screen
+            name="NoteShow"
+            component={NoteShow}
+            options={{
+              title: "",
+              headerStyle: {
+                backgroundColor: "#1C1C1E",
+              },
+              headerLeft: () => <HeaderComp edit={false} header="left" />,
+            }}
+          />
+          <Stack.Screen
+            name="EditNoteScreen"
+            component={EditNoteScreen}
+            options={{
+              title: "",
+              headerStyle: {
+                backgroundColor: "#1C1C1E",
+              },
+              headerLeft: () => <HeaderComp edit={true} header="left" />,
+              headerRight: () => <HeaderComp edit={true} />,
             }}
           />
         </Stack.Navigator>

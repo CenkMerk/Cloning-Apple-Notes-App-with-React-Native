@@ -6,6 +6,7 @@ const NotesContext = createContext();
 function Provider({ children }) {
   const [notes, setNotes] = useState([]);
   const [text, setText] = useState("");
+  const [editNoteId, setEditNoteId] = useState(null);
 
   const createNote = () => {
     const createdNotes = [
@@ -15,14 +16,28 @@ function Provider({ children }) {
         text,
       },
     ];
-    setNotes(createdNotes);
+    text.length > 0 ? setNotes(createdNotes) : null;
     setText("");
   };
+
+  const editNote = () => {
+    const updatedNotes = notes.map((note) => {
+      if (note.id === editNoteId) {
+        return { editNoteId, text };
+      }
+      return note;
+    });
+    setNotes(updatedNotes);
+    setText("");
+  };
+
   const sharedValuesAndMethods = {
     notes,
     createNote,
     text,
     setText,
+    editNote,
+    setEditNoteId
   };
 
   return (
