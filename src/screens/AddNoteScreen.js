@@ -1,13 +1,15 @@
 import { StyleSheet, Text, TextInput, View } from "react-native";
-import React, { useRef, useEffect } from "react";
+import React, { useRef, useEffect, useContext } from "react";
+import NotesContext from "../context/Notes";
 
 export default function AddNoteScreen() {
   const inputRef = useRef(null);
+  const { text, setText } = useContext(NotesContext);
 
   useEffect(() => {
     const timer = setTimeout(() => {
       inputRef.current.focus();
-    }, 300); 
+    }, 300);
 
     return () => clearTimeout(timer);
   }, []);
@@ -19,6 +21,8 @@ export default function AddNoteScreen() {
         selectionColor="#FFD52E"
         ref={inputRef}
         keyboardAppearance="dark"
+        onChangeText={(new_text) => setText(new_text)}
+        value={text}
       />
     </View>
   );

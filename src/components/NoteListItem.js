@@ -5,8 +5,7 @@ export default function NoteListItem({ item }) {
   return (
     <View style={styles.button}>
       <TouchableOpacity>
-        <Text style={styles.title}>{item.title}</Text>
-        <Text style={styles.desc}>{item.desc}</Text>
+        <Text style={styles.title} numberOfLines={1} ellipsizeMode="tail">{item.text}</Text>
       </TouchableOpacity>
     </View>
   );
@@ -20,7 +19,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     padding: 15,
     shadowColor: "white",
-    backgroundColor:"#1C1C1E",
+    backgroundColor: "#1C1C1E",
     shadowOffset: {
       width: 0,
       height: 2,

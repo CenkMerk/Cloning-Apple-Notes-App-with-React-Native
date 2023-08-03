@@ -1,22 +1,14 @@
 import { FlatList, StyleSheet, Text, View } from "react-native";
-import React from "react";
+import React, { useContext } from "react";
 import NoteListItem from "./NoteListItem";
+import NotesContext from "../context/Notes";
 
 export default function NotesList() {
-  const Notes = [
-    {
-      title: "cenkmerk",
-      desc: "dağlar daslkn ascasca",
-    },
-    {
-      title: "cenkmerk",
-      desc: "dağlar daslkn ascasca",
-    },
-  ];
+  const { notes } = useContext(NotesContext);
   return (
     <View style={styles.container}>
       <FlatList
-        data={Notes}
+        data={notes}
         showsVerticalScrollIndicator={false}
         renderItem={({ item }) => {
           return <NoteListItem item={item} />;
