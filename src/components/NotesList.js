@@ -1,10 +1,12 @@
 import { FlatList, StyleSheet, Text, View } from "react-native";
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import NoteListItem from "./NoteListItem";
 import NotesContext from "../context/Notes";
 
 export default function NotesList() {
   const { notes } = useContext(NotesContext);
+  useEffect(() => {}, [notes]);
+
   return (
     <View style={styles.container}>
       <FlatList

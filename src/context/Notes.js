@@ -31,9 +31,10 @@ function Provider({ children }) {
     setText("");
   };
 
-  const deleteNote = () => {
+  const deleteNote = (id) => {
+    console.log(id)
     const afterDeletingNotes = notes.filter((note) => {
-      return note.id !== showNoteId;
+      return note.id !== id;
     });
     setNotes(afterDeletingNotes);
   };
@@ -44,8 +45,9 @@ function Provider({ children }) {
     text,
     setText,
     editNote,
+    showNoteId,
     setShowNoteId,
-    deleteNote
+    deleteNote,
   };
 
   return (
