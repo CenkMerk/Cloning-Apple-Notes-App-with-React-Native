@@ -13,28 +13,34 @@ import NotesContext from "./src/context/Notes";
 import { useContext } from "react";
 import NoteShow from "./src/screens/NoteShow";
 import EditNoteScreen from "./src/screens/EditNoteScreen";
+import { AntDesign } from '@expo/vector-icons';
 
-const HeaderComp = ({ header, edit }) => {
+const HeaderComp = ({ header, func }) => {
   const navigation = useNavigation();
-  const { createNote, editNote } = useContext(NotesContext);
-  const HandleCreateNote = () => {
+  const { createNote, editNote,deleteNote } = useContext(NotesContext);
+  const HandleClick = () => {
     navigation.navigate("Home");
-    createNote();
-  };
-  const HandleEditNote = () => {
-    console.log("edit");
-    navigation.navigate("Home");
-    editNote();
+    if (func === "create") {
+      createNote();
+    } else if (func === "edit") {
+      editNote();
+    } else {
+      deleteNote();
+    }
   };
   return (
-    <TouchableOpacity onPress={edit ? HandleEditNote : HandleCreateNote}>
-      {header === "left" ? (
-        <View style={styles.headerLeftContainer}>
+    <TouchableOpacity onPress={HandleClick}>
+      {header === "left" && (
+        <View style={styles.headerContainer}>
           <Ionicons name="chevron-back" size={30} color="#FFD52E" />
-          <Text style={styles.headerLeftTitle}>Notes</Text>
+          <Text style={styles.headerTitle}>Notes</Text>
         </View>
-      ) : (
-        <Text style={styles.headerLeftTitle}>Done</Text>
+      )}
+      {header === "right" && func === "delete" && (
+       <AntDesign name="delete" size={25} color="#FFD52E" />
+      )}
+      {header === "right" && (func === "create" || func === "edit") && (
+        <Text style={styles.headerTitle}>Done</Text>
       )}
     </TouchableOpacity>
   );
@@ -60,8 +66,8 @@ export default function App() {
               headerStyle: {
                 backgroundColor: "#1C1C1E",
               },
-              headerLeft: () => <HeaderComp edit={false} header="left" />,
-              headerRight: () => <HeaderComp edit={false} header="right" />,
+              headerLeft: () => <HeaderComp func="create" header="left" />,
+              headerRight: () => <HeaderComp func="create" header="right" />,
             }}
           />
           <Stack.Screen
@@ -72,7 +78,8 @@ export default function App() {
               headerStyle: {
                 backgroundColor: "#1C1C1E",
               },
-              headerLeft: () => <HeaderComp edit={false} header="left" />,
+              headerLeft: () => <HeaderComp func="null" header="left" />,
+              headerRight: () => <HeaderComp func="delete" header="right" />,
             }}
           />
           <Stack.Screen
@@ -83,8 +90,8 @@ export default function App() {
               headerStyle: {
                 backgroundColor: "#1C1C1E",
               },
-              headerLeft: () => <HeaderComp edit={true} header="left" />,
-              headerRight: () => <HeaderComp edit={true} />,
+              headerLeft: () => <HeaderComp func="edit" header="left" />,
+              headerRight: () => <HeaderComp func="edit" header="right" />,
             }}
           />
         </Stack.Navigator>
@@ -94,11 +101,11 @@ export default function App() {
 }
 
 const styles = StyleSheet.create({
-  headerLeftContainer: {
+  headerContainer: {
     flexDirection: "row",
     alignItems: "center",
   },
-  headerLeftTitle: {
+  headerTitle: {
     color: "#FFD52E",
     fontWeight: "bold",
     fontSize: 18,

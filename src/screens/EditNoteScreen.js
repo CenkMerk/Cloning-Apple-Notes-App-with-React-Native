@@ -4,13 +4,12 @@ import NotesContext from "../context/Notes";
 
 export default function EditNoteScreen({ route }) {
   const inputRef = useRef(null);
-  const { text, setText, setEditNoteId } = useContext(NotesContext);
+  const { text, setText } = useContext(NotesContext);
   const { notes } = useContext(NotesContext);
   const note = notes.find((item) => item.id === route.params.id);
 
   useEffect(() => {
     setText(note.text);
-    setEditNoteId(note.id);
     const timer = setTimeout(() => {
       inputRef.current.focus();
     }, 300);
