@@ -10,20 +10,22 @@ import { Feather } from "@expo/vector-icons";
 import NotesList from "../components/NotesList";
 import { useNavigation } from "@react-navigation/native";
 
-
 export default function HomeScreen() {
   const navigation = useNavigation();
   return (
-    <ScrollView contentContainerStyle={styles.container}>
-      <Text style={styles.title}>Notes</Text>
-      <TouchableOpacity
-        style={styles.button}
-        onPress={() => navigation.navigate("AddNoteScreen")}
-      >
-        <Feather name="edit" size={30} color="#FFD52E" />
-      </TouchableOpacity>
+    <View style={styles.container}>
+      <View style={styles.header}>
+        <Text style={styles.title}>Notes</Text>
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => navigation.navigate("AddNoteScreen")}
+        >
+          <Feather name="edit" size={30} color="#FFD52E" />
+        </TouchableOpacity>
+      </View>
+
       <NotesList />
-    </ScrollView>
+    </View>
   );
 }
 
@@ -34,15 +36,15 @@ const styles = StyleSheet.create({
     paddingVertical: "10%",
     paddingHorizontal: "5%",
   },
+  header: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    padding:"5%"
+  },
   title: {
     color: "white",
     fontWeight: "bold",
     fontSize: 30,
-    paddingLeft: "5%",
-  },
-  button: {
-    position: "absolute",
-    bottom: "10%",
-    right: "10%",
   },
 });

@@ -9,14 +9,15 @@ export default function NotesList() {
       desc: "dağlar daslkn ascasca",
     },
     {
-      title: "ascasca",
-      desc: "ascasc as as ascas",
+      title: "cenkmerk",
+      desc: "dağlar daslkn ascasca",
     },
   ];
   return (
     <View style={styles.container}>
       <FlatList
         data={Notes}
+        showsVerticalScrollIndicator={false}
         renderItem={({ item }) => {
           return <NoteListItem item={item} />;
         }}
