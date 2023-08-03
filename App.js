@@ -3,8 +3,31 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 const Stack = createNativeStackNavigator();
 //screens
-import Home from "./src/screens/Home";
-import { Text } from "react-native";
+import HomeScreen from "./src/screens/HomeScreen";
+import AddNoteScreen from "./src/screens/AddNoteScreen";
+import { Text, View, StyleSheet, TouchableOpacity } from "react-native";
+import { Ionicons } from "@expo/vector-icons";
+import { useNavigation } from "@react-navigation/native";
+
+const HeaderLeftComp = () => {
+  const navigation = useNavigation();
+  return (
+    <TouchableOpacity onPress={() => navigation.goBack()}>
+      <View style={styles.headerLeftContainer}>
+        <Ionicons name="chevron-back" size={30} color="#FFD52E" />
+        <Text style={styles.headerLeftTitle}>Notes</Text>
+      </View>
+    </TouchableOpacity>
+  );
+};
+const HeaderRightComp = () => {
+  const navigation = useNavigation();
+  return (
+    <TouchableOpacity onPress={() => navigation.goBack()}>
+        <Text style={styles.headerLeftTitle}>Done</Text>
+    </TouchableOpacity>
+  );
+};
 
 export default function App() {
   return (
@@ -12,37 +35,36 @@ export default function App() {
       <Stack.Navigator>
         <Stack.Screen
           name="Home"
-          component={Home}
+          component={HomeScreen}
           options={{
             headerShown: false,
+          }}
+        />
+        <Stack.Screen
+          name="AddNoteScreen"
+          component={AddNoteScreen}
+          options={{
+            title: "",
+            headerStyle: {
+              backgroundColor: "#1C1C1E",
+            },
+            headerLeft: () => <HeaderLeftComp />,
+            headerRight: () => <HeaderRightComp/>,
           }}
         />
       </Stack.Navigator>
     </NavigationContainer>
   );
 }
-{
-  /* <ScrollView style={styles.container}>
-      <View style={styles.titleContainer}>
-        <Text style={styles.title}>Notes</Text>
-        <TouchableOpacity>
-          <Feather name="edit" size={26} color="#FFD52E" />
-        </TouchableOpacity>
-      </View>
-    </ScrollView>
-     container: {
-      backgroundColor: "black",
-      padding: "10%",
-    },
-    title: {
-      color: "white",
-      fontWeight: "bold",
-      fontSize: 30,
-    },
-    titleContainer: {
-      width: "100%",
-      flexDirection:"row",
-      alignItems:"center",
-      justifyContent:"space-between"
-    }, */
-}
+
+const styles = StyleSheet.create({
+  headerLeftContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+  },
+  headerLeftTitle: {
+    color: "#FFD52E",
+    fontWeight: "bold",
+    fontSize: 18,
+  },
+});
