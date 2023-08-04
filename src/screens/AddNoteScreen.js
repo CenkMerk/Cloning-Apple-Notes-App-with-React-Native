@@ -1,5 +1,7 @@
+//the purpose of this screen is to get the user's note with TextInput
+
 import React, { useRef, useEffect, useContext } from "react";
-import { StyleSheet, Text, TextInput, View } from "react-native";
+import { StyleSheet, TextInput, View } from "react-native";
 //context
 import NotesContext from "../context/Notes";
 
@@ -8,12 +10,14 @@ export default function AddNoteScreen() {
   const { text, setText } = useContext(NotesContext);
 
   useEffect(() => {
+    //automatically focuses on the input field 0.3 seconds after page load
     const timer = setTimeout(() => {
       inputRef.current.focus();
     }, 300);
 
     return () => clearTimeout(timer);
   }, []);
+  
   return (
     <View style={styles.container}>
       <TextInput

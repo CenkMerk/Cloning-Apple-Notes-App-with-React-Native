@@ -1,3 +1,5 @@
+//This screen is the homepage with the list of notes and the button to add a new note
+
 import React from "react";
 import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
 //navigation

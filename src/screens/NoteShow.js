@@ -1,3 +1,5 @@
+//This screen is the page to show the selected note.
+
 import React, { useContext, useEffect } from "react";
 import { StyleSheet, Text, TouchableOpacity } from "react-native";
 //navigation
