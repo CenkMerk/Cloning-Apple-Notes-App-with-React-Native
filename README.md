@@ -1,12 +1,12 @@
 # Cloning Apple Notes App with React Native
 
-### 💡 Kazanımlar
+### 💡 Gains
 
-- React Native ile proje geliştirmek
+- Developing projects with React Native
 
-- useContext ile durum yönetimi
+- State management with useContext
 
 
-### 🛠️ Fonksiyonlar
+### 🛠️ Functions
 
-- Not ekleme, silme ve düzenleme
+- Add, delete and edit notes
