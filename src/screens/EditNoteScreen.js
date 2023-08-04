@@ -1,11 +1,12 @@
 import { StyleSheet, Text, TextInput, View } from "react-native";
 import React, { useRef, useEffect, useContext, useState } from "react";
+//context
 import NotesContext from "../context/Notes";
 
 export default function EditNoteScreen({ route }) {
   const inputRef = useRef(null);
-  const { text, setText } = useContext(NotesContext);
-  const { notes } = useContext(NotesContext);
+  const { text, setText, notes } = useContext(NotesContext);
+
   const note = notes.find((item) => item.id === route.params.id);
 
   useEffect(() => {

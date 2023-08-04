@@ -1,5 +1,6 @@
-import { StyleSheet, Text, TextInput, View } from "react-native";
 import React, { useRef, useEffect, useContext } from "react";
+import { StyleSheet, Text, TextInput, View } from "react-native";
+//context
 import NotesContext from "../context/Notes";
 
 export default function AddNoteScreen() {

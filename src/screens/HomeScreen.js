@@ -1,17 +1,15 @@
-import {
-  StyleSheet,
-  Text,
-  View,
-  ScrollView,
-  TouchableOpacity,
-} from "react-native";
 import React from "react";
-import { Feather } from "@expo/vector-icons";
-import NotesList from "../components/NotesList";
+import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
+//navigation
 import { useNavigation } from "@react-navigation/native";
+//components
+import NotesList from "../components/NotesList";
+//icons
+import { Feather } from "@expo/vector-icons";
 
 export default function HomeScreen() {
   const navigation = useNavigation();
+  
   return (
     <View style={styles.container}>
       <View style={styles.header}>

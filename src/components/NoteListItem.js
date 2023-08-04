@@ -1,9 +1,11 @@
-import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import React from "react";
+import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+//navigation
 import { useNavigation } from "@react-navigation/native";
 
 export default function NoteListItem({ item }) {
   const navigation = useNavigation();
+  
   return (
     <View style={styles.button}>
       <TouchableOpacity

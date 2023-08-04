@@ -1,11 +1,14 @@
-import { StyleSheet, Text, TouchableOpacity } from "react-native";
 import React, { useContext, useEffect } from "react";
-import NotesContext from "../context/Notes";
+import { StyleSheet, Text, TouchableOpacity } from "react-native";
+//navigation
 import { useNavigation } from "@react-navigation/native";
+//context
+import NotesContext from "../context/Notes";
 
 export default function NoteShow({ route }) {
   const navigation = useNavigation();
   const { notes, setShowNoteId } = useContext(NotesContext);
+  
   const note = notes.find((item) => item.id === route.params.id);
 
   useEffect(() => {

@@ -21,6 +21,9 @@ function Provider({ children }) {
   };
 
   const editNote = () => {
+    if (text.length === 0) {
+      return deleteNote(showNoteId);
+    }
     const updatedNotes = notes.map((note) => {
       if (note.id === showNoteId) {
         return { showNoteId, text };
@@ -32,7 +35,6 @@ function Provider({ children }) {
   };
 
   const deleteNote = (id) => {
-    console.log(id)
     const afterDeletingNotes = notes.filter((note) => {
       return note.id !== id;
     });
